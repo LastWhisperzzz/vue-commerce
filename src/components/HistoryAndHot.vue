@@ -9,7 +9,9 @@
     </van-row>
     <van-row gutter="10">
       <van-col v-for="(item, i) in historyKeywordList" :key="i">
-        <van-tag plain type="default">{{ item }}</van-tag>
+        <van-tag plain type="default" @click="tagClick(item)">{{
+          item
+        }}</van-tag>
       </van-col>
     </van-row>
 
@@ -18,22 +20,32 @@
     </van-row>
     <van-row gutter="10">
       <van-col v-for="(item, i) in hotKeywordList" :key="i">
-        <van-tag plain :type="item.is_hot == 1 ? 'danger' : 'default'">{{
-          item.keyword
-        }}</van-tag>
+        <van-tag
+          plain
+          :type="item.is_hot == 1 ? 'danger' : 'default'"
+          @click="tagClick(item.keyword)"
+          >{{ item.keyword }}</van-tag
+        >
       </van-col>
     </van-row>
   </div>
 </template>
 
 <script>
+import { clearHistory } from '../request/api'
+
 export default {
   name: 'HistoryAndHot',
   props: ['historyKeywordList', 'hotKeywordList'],
   methods: {
-    //清空标签
+    tagClick(keyword) {
+      this.$emit('tagClick', keyword)
+    },
+    //清空历史
     clearTag() {
-      //应该发送请求到服务器端进行清除,本地清除没有意义
+      clearHistory().then(res => {
+        if (res) this.$toast('清除成功')
+      })
     }
   }
 }
