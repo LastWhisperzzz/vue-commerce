@@ -9,9 +9,7 @@
     </van-row>
     <van-row gutter="10">
       <van-col v-for="(item, i) in historyKeywordList" :key="i">
-        <van-tag plain type="default" @click="tagClick(item)">{{
-          item
-        }}</van-tag>
+        <van-tag plain type="default" @click="tagClick(item)">{{ item }}</van-tag>
       </van-col>
     </van-row>
 

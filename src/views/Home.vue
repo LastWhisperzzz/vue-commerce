@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-    <van-search
-      placeholder="请输入搜索关键词"
-      shape="round"
-      disabled
-      @click="gotoPopup"
-    />
+    <van-search placeholder="请输入搜索关键词" shape="round" disabled @click="gotoPopup" />
     <van-swipe :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="item in banner" :key="item.id">
         <img :src="item.image_url" width="100%" />

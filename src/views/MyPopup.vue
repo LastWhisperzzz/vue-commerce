@@ -20,11 +20,7 @@
       :hotKeywordList="hotKeywordList"
       @tagClick="tagClick"
     />
-    <MyList
-      v-else-if="blockShow === 2"
-      :searchList="searchList"
-      @cellClick="tagClick"
-    />
+    <MyList v-else-if="blockShow === 2" :searchList="searchList" @cellClick="tagClick" />
     <MyProduct
       v-else
       :goodsList="goodsList"

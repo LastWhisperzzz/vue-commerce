@@ -19,12 +19,27 @@ const routes = [
         component: () => import('../views/MyPopup')
       }
     ]
+  },
+  {
+    path: '/topic',
+    name: 'Topic',
+    component: () => import('../views/Topic')
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: () => import('../views/Category')
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import('../views/Cart')
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import('../views/User')
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import('../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({

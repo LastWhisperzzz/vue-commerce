@@ -2,11 +2,7 @@
   <!-- 展示单个商品简略信息 -->
   <div>
     <van-grid :column-num="2" :border="false">
-      <van-grid-item
-        v-for="item in goodsList"
-        :key="item.id"
-        @click="clickItem(item.id)"
-      >
+      <van-grid-item v-for="item in goodsList" :key="item.id" @click="clickItem(item.id)">
         <!-- 使用插槽自定义样式 -->
         <template>
           <img :src="item.list_pic_url" style="width:100%;height:100%" />

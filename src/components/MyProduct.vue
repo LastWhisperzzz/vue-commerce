@@ -16,11 +16,7 @@
         @change="categoryChange"
       />
     </van-dropdown-menu>
-    <van-empty
-      v-if="goodsList.length == 0"
-      image="search"
-      description="搜索的产品不存在"
-    />
+    <van-empty v-if="goodsList.length == 0" image="search" description="搜索的产品不存在" />
     <Product v-else :goodsList="goodsList" />
   </div>
 </template>

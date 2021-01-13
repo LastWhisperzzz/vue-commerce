@@ -1,8 +1,17 @@
 <template>
   <div id="app">
     <router-view />
+    <MyTabBar v-if="!($route.path === '/productDetail' || $route.path === '/home/popup')" />
   </div>
 </template>
+
+<script>
+import MyTabBar from './components/MyTabBar'
+
+export default {
+  components: { MyTabBar }
+}
+</script>
 
 <style lang="scss">
 #app {

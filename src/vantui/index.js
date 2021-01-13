@@ -16,6 +16,8 @@ import {
   GridItem,
   List,
   Cell,
+  Tabbar,
+  TabbarItem,
   Toast
 } from 'vant'
 
@@ -34,4 +36,6 @@ Vue.use(Grid)
 Vue.use(GridItem)
 Vue.use(List)
 Vue.use(Cell)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
 Vue.use(Toast)
