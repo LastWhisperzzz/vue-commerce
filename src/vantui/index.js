@@ -18,7 +18,9 @@ import {
   Cell,
   Tabbar,
   TabbarItem,
-  Toast
+  Toast,
+  Form,
+  Field
 } from 'vant'
 
 Vue.use(Button)
@@ -39,3 +41,5 @@ Vue.use(Cell)
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
 Vue.use(Toast)
+Vue.use(Form)
+Vue.use(Field)
