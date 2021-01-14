@@ -1,14 +1,18 @@
 <template>
+  <!-- 底部导航首页 -->
   <div class="home">
-    <van-search placeholder="请输入搜索关键词" shape="round" disabled @click="gotoPopup" />
-    <van-swipe :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="item in banner" :key="item.id">
-        <img :src="item.image_url" width="100%" />
-      </van-swipe-item>
-    </van-swipe>
+    <!--处理首页内容过长会增加到/home/popup下面-->
+    <div v-if="$route.path === '/home'">
+      <van-search placeholder="请输入搜索关键词" shape="round" disabled @click="gotoPopup" />
+      <van-swipe :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="item in banner" :key="item.id">
+          <img :src="item.image_url" width="100%" />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
 
     <transition name="van-slide-right">
-      <router-view />
+      <router-view v-if="$route.path === '/home/popup'" />
     </transition>
   </div>
 </template>

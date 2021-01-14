@@ -1,5 +1,5 @@
 <template>
-  <!-- 用户页 -->
+  <!-- 底部导航用户页 -->
   <div class="user">
     <van-row>
       <van-col span="8">
