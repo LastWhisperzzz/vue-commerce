@@ -14,7 +14,7 @@
       <p>{{ info.goods_brief }}</p>
       <p class="price">{{ info.retail_price | filterMoney }}</p>
     </div>
-    <van-cell class="showSku" title="展示弹出层" is-link />
+    <van-cell class="showSku" title="展示弹出层" is-link @click="showSku = !showSku" />
     <!-- 商品参数 -->
     <div class="attribute">
       <h4>商品参数</h4>
@@ -47,21 +47,40 @@
       <span>大家都在看</span>
     </div>
     <Product :goodsList="goodsList" />
-    <MyGoodsActions />
+    <!-- Sku -->
+    <van-sku
+      v-model="showSku"
+      :sku="sku"
+      :goods="goods"
+      :hide-stock="sku.hide_stock"
+      @buy-clicked="onBuyClicked"
+      @add-cart="onAddCartClicked"
+    ></van-sku>
+    <MyGoodsActions @openSku="openSku" :badge="badge" />
   </div>
 </template>
 
 <script>
-import { getProductDetail, getAboutProduct } from '../request/api'
+import { getProductDetail, getAboutProduct, getCartCount, addProductToCart } from '../request/api'
 import Tips from '../components/Tips'
 import Product from '../components/Product'
 import MyGoodsActions from '../components/MyGoodsActions'
+import storageUtil from '../util/storageUtil'
 
 export default {
   name: 'ProductDetail',
   components: { Tips, Product, MyGoodsActions },
   data() {
     return {
+      //显示Sku
+      showSku: false,
+      sku: {
+        tree: [],
+        hide_stock: false, //是否隐藏剩余库存
+        price: '', // 默认价格（单位元）
+        stock_num: 0 //商品总库存
+      },
+      goods: { picture: 'https://img.yzcdn.cn/1.jpg' },
       //轮播图
       gallery: [],
       //商品信息
@@ -77,7 +96,9 @@ export default {
       //常见问题
       issue: [],
       //相关产品
-      goodsList: []
+      goodsList: [],
+      productList: [],
+      badge: 0
     }
   },
   created() {
@@ -89,17 +110,56 @@ export default {
     initData(id) {
       getProductDetail({ id }).then(res => {
         console.log(res)
-        const { gallery, info, attribute, issue } = res.data
+        const { gallery, info, attribute, issue, productList } = res.data
         this.gallery = gallery
         this.info = info
         this.attribute = attribute
         this.issue = issue
+        this.productList = productList
         this.$refs.box.innerHTML = info.goods_desc
+        //渲染sku
+        this.goods.picture = info.list_pic_url
+        this.sku.price = info.retail_price.toFixed(2)
+        this.sku.stock_num = info.goods_number
         //获取相关产品
         getAboutProduct({ id }).then(res => {
           this.goodsList = res.data.goodsList
         })
+        //获取购物车数量
+        getCartCount().then(res => {
+          this.badge = res.data.cartTotal.goodsCount
+        })
       })
+    },
+    /**
+     * 加入购物车
+     * @param skuData  sku数据
+     */
+    onAddCartClicked(skuData) {
+      //用户未登录则跳转到登录页面
+      if (storageUtil.getToken().length == 0) {
+        this.$toast('请先登录')
+        this.$router.push('/user')
+        return
+      }
+
+      let goodsId = this.productList[0].goods_id
+      let productId = this.productList[0].id
+      let number = skuData.selectedNum
+      addProductToCart({ goodsId, productId, number }).then(res => {
+        if (res.errno === 0) {
+          this.badge = res.data.cartTotal.goodsCount
+          this.$toast.success('添加成功')
+        }
+        this.showSku = false
+        // this.$router.push('/cart')
+      })
+    },
+    onBuyClicked() {
+      this.$toast('功能暂未实现!')
+    },
+    openSku() {
+      this.showSku = true
     },
     back() {
       this.$router.push('/home/popup')
@@ -224,5 +284,9 @@ export default {
       padding-left: 0.2rem;
     }
   }
+}
+
+.van-sku-container {
+  min-height: auto;
 }
 </style>

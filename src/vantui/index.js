@@ -23,9 +23,11 @@ import {
   Field,
   ShareSheet,
   Image as VanImage,
+  Divider,
   GoodsAction,
   GoodsActionIcon,
-  GoodsActionButton
+  GoodsActionButton,
+  Sku
 } from 'vant'
 
 Vue.use(Button)
@@ -50,6 +52,8 @@ Vue.use(Form)
 Vue.use(Field)
 Vue.use(ShareSheet)
 Vue.use(VanImage)
+Vue.use(Divider)
 Vue.use(GoodsAction)
 Vue.use(GoodsActionIcon)
 Vue.use(GoodsActionButton)
+Vue.use(Sku)

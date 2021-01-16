@@ -16,3 +16,7 @@ export const goLogin = params => request.post('/auth/loginByWeb', params)
 export const getProductDetail = params => request.get('/goods/detail', { params })
 // 相关产品
 export const getAboutProduct = params => request.get('/goods/related', { params })
+// 获取购物车商品数量,需在请求头携带token
+export const getCartCount = params => request.get('/cart/goodscount', { params })
+// 加入购物车
+export const addProductToCart = params => request.post('/cart/add', params)

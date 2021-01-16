@@ -1,4 +1,5 @@
 import axios from 'axios'
+import storageUtil from '../util/storageUtil'
 
 const instance = axios.create({
   baseURL: 'http://kumanxuan1.f3322.net:8001',
@@ -8,6 +9,10 @@ const instance = axios.create({
 //请求拦截
 instance.interceptors.request.use(
   config => {
+    const token = storageUtil.getToken()
+    if (token.length > 0) {
+      config.headers['X-Nideshop-Token'] = token
+    }
     return config
   },
   error => {
