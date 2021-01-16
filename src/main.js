@@ -7,6 +7,12 @@ import './vantui'
 import './assets/css/reset.css'
 Vue.config.productionTip = false
 
+//过滤器
+Vue.filter('filterMoney', val => {
+  let newVal = Number(val)
+  return '￥' + newVal.toFixed(2) + '元'
+})
+
 new Vue({
   router,
   store,

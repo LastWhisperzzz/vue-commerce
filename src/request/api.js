@@ -12,3 +12,7 @@ export const getTimeSearch = params => request.get('/search/helper', { params })
 export const clearHistory = () => request.post('/search/clearhistory')
 // 登录
 export const goLogin = params => request.post('/auth/loginByWeb', params)
+// 查看商品详细信息
+export const getProductDetail = params => request.get('/goods/detail', { params })
+// 相关产品
+export const getAboutProduct = params => request.get('/goods/related', { params })

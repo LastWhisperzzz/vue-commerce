@@ -1,6 +1,6 @@
 <template>
   <!-- 展示单个商品简略信息 -->
-  <div>
+  <div class="container">
     <van-grid :column-num="2" :border="false">
       <van-grid-item v-for="item in goodsList" :key="item.id" @click="clickItem(item.id)">
         <!-- 使用插槽自定义样式 -->
@@ -19,22 +19,26 @@ export default {
   name: 'Product',
   props: ['goodsList'],
   methods: {
-    clickItem() {}
+    clickItem(id) {
+      console.log(id)
+      this.$router.push('/productDetail?id=' + id)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.price {
-  /* font-weight: bold; */
-  color: red;
+.container {
+  background-color: #efefef;
+  .van-grid {
+    padding: 0.1rem 2%;
+    .van-grid-item {
+      padding: 1%;
+      width: 49%;
+      .price {
+        color: red;
+      }
+    }
+  }
 }
-
-// .van-grid {
-//   padding: 2%;
-//   .van-grid-item {
-//     padding: 1%;
-//     width: 49%;
-//   }
-// }
 </style>

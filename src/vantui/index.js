@@ -20,7 +20,12 @@ import {
   TabbarItem,
   Toast,
   Form,
-  Field
+  Field,
+  ShareSheet,
+  Image as VanImage,
+  GoodsAction,
+  GoodsActionIcon,
+  GoodsActionButton
 } from 'vant'
 
 Vue.use(Button)
@@ -43,3 +48,8 @@ Vue.use(TabbarItem)
 Vue.use(Toast)
 Vue.use(Form)
 Vue.use(Field)
+Vue.use(ShareSheet)
+Vue.use(VanImage)
+Vue.use(GoodsAction)
+Vue.use(GoodsActionIcon)
+Vue.use(GoodsActionButton)
